@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<title>iframe child window</title>
+</head>
+<body>
+<h1>I am iframe (child)</h1>
+
+<p>1. call parent function (parent test())</p>
+<a onclick="parent.test();" href="#" >Call Parent</a>
+
+<p>2. child function (come from parent call)</p>
+<script>
+function test() {
+    alert('come from parent call');
+}
+</script>
+
+</body>
+</html>

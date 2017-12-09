@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<title>iframe parent window</title>
+<script>
+function test()
+{
+    alert('come from children call');
+}
+</script>
+</head>
+<body>
+
+<p>1. get children function call</p>
+<iframe id="myiframe" src="iframe-child.html" width="500" height="300"></iframe>
+
+<p>2. set child iframe background red and call child test() function</p>
+<button onclick="return set_children_color();">set iframe background red and child test()</button>
+<script>
+function set_children_color()
+{
+    var frames = window.frames;
+    for (var i = 0; i < frames.length; i++) {
+        frames[i].document.body.style.background = "red";
+        frames[i].test();
+    }
+
+    // or
+    // parent.contentWindow.test();
+}
+</script>
+</body>
+</html>

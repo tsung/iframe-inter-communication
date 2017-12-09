@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<title>iframe parent and postmessage</title>
+<script>
+function test()
+{
+    alert('children call');
+}
+</script>
+</head>
+<body>
+
+<p>1. get children function call</p>
+<iframe id="myiframe" src="iframe-call-parent-child.html" width="500" height="300"></iframe>
+
+<p>2. send postmessage to children</p>
+<button onclick="myiframe.contentWindow.postMessage('test', '*');">send hello to children(postmessage)</button>
+
+<p>3. set iframe background red and function call</p>
+<button onclick="return set_children_color();">set iframe background red</button>
+<script>
+function set_children_color()
+{
+    var frames = window.frames;
+    for (var i = 0; i < frames.length; i++) {
+        frames[i].document.body.style.background = "red";
+        frames[i].test();
+    }
+
+    // or
+    // parent.contentWindow.test();
+}
+</script>
+
+<p>4. get children postmessage</p>
+<script>
+// 4. 接收 children button 訊息
+window.onmessage = function(e){
+    if (e.data == 'test-from-children') {
+        alert('get children postmessage');
+    }
+};
+</script>
+</body>
+</html>

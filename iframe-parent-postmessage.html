@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<title>iframe parent window - postMessage</title>
+</head>
+<body>
+
+<p>1. children iframe and send postmessage to children</p>
+<iframe id="myiframe" src="iframe-child-postmessage.html" width="500" height="300"></iframe>
+<p><button onclick="myiframe.contentWindow.postMessage('test', '*');">send hello to children(postmessage)</button></p>
+
+<p>2. get children postmessage</p>
+<script>
+// 4. 接收 children button 訊息
+window.onmessage = function(e){
+    if (e.data == 'test-from-children') {
+        alert('come from children postmessage');
+    }
+};
+</script>
+</body>
+</html>

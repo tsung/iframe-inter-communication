@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<title>iframe child and postmessage</title>
+</head>
+<body>
+<h1>I am iframe (child)</h1>
+
+<p>1. call parent function</p>
+<a onclick="parent.test();" href="#" >Call Parent</a>
+
+
+<p>2. get parent message</p>
+<script>
+// 2. 接收 parent button 訊息
+window.onmessage = function(e){
+    if (e.data == 'test') {
+        alert('get parent postmessage');
+    }
+};
+</script>
+
+<p>3. function call</p>
+<script>
+function test() {
+    alert('parent call');
+}
+</script>
+
+<p>4. children postmessage to parent </p>
+<button onclick="parent.postMessage('test-from-children', '*');">send hello to parent(postmessage)</button>
+
+</body>
+</html>
